@@ -5,6 +5,8 @@ import (
 	"strings"
 
 	"github.com/virtual-kubelet/virtual-kubelet/log"
+	"github.com/virtual-kubelet/virtual-kubelet/version"
+
 	"go.opencensus.io/trace"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -40,7 +42,7 @@ func (s *Server) registerNode(ctx context.Context) error {
 			NodeInfo: corev1.NodeSystemInfo{
 				OperatingSystem: s.provider.OperatingSystem(),
 				Architecture:    "amd64",
-				KubeletVersion:  "v1.11.2",
+				KubeletVersion:  version.Version,
 			},
 			Capacity:        s.provider.Capacity(ctx),
 			Allocatable:     s.provider.Capacity(ctx),
